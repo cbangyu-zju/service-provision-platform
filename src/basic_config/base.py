@@ -12,7 +12,7 @@ class Base(object):
     def check(self):
         pass
 
-    def set(self):
+    def set(self, status):
         pass
 
     def _run_command(self, command):

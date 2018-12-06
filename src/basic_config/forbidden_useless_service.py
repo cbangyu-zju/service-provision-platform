@@ -6,9 +6,9 @@ class ForbiddenUselessService(base.Base):
 
     def __init__(self, system, version):
         super(ForbiddenUselessService, self).__init__(system, version)
-        self._status = self.check_all()
+        self._status = self.check()
 
-    def check_all(self):
+    def check(self):
         ready_count = 0
         for device in self._devices:
             ready_count += self._check(device)
@@ -17,7 +17,7 @@ class ForbiddenUselessService(base.Base):
         else:
             return True
 
-    def set_all(self, status):
+    def set(self, status):
         if status == self._status:
             return True
         ready_count = 0
