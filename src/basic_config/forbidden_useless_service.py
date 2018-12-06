@@ -13,9 +13,10 @@ class ForbiddenUselessService(base.Base):
         for device in self._devices:
             ready_count += self._check(device)
         if ready_count < len(self._devices):
-            return False
+            self._status = False
         else:
-            return True
+            self._status = True
+        return self._status
 
     def set(self, status):
         if status == self._status:
