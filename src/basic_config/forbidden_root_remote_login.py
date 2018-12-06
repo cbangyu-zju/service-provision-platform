@@ -3,17 +3,6 @@ from . import base
 
 class ForbiddenRootRemoteLogin(base.Base):
 
-    _set_command_line = {
-        "ubuntu": "",
-        "centos": "cp /etc/ssh/sshd_config ./sshd_config \
-            && sed -i 's/PermitRootLogin yes/PermitRootLogin no/' '/etc/ssh/sshd_config' \
-            && sed -i 's/#PermitRootLogin no/PermitRootLogin no/' '/etc/ssh/sshd"
-    }
-    _restore_command_line = {
-        "ubuntu": "",
-        "centos": "mv './sshd_config' '/etc/ssh/sshd_config'"
-    }
-
     def __init__(self, system, version):
         super(ForbiddenRootRemoteLogin, self).__init__(system, version)
         self._status = self.check()
