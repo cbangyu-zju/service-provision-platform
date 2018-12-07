@@ -22,18 +22,21 @@ class PasswordPeriod(base.Base):
     def set(self, status):
         if status == self._status:
             return
-        return self._set()
+        if status:
+            return self._set()
+        else:
+            return self._unset()
 
     def _set(self):
         if not self.check():
             cmd = "echo 'auth required pam_tally2.so deny=5 unlock_time=600' >> '{op_file}'"
             cmd = cmd.format(op_file=self._op_file)
             self._run_command(cmd)
-        return True
+        return self.check()
 
     def _unset(self):
         if self.check():
             cmd = "sed -i '/^auth.*required.*pam_tally2.so.*deny=5.*unlock_time=600/d' '{op_file}'".format(
                 op_file=self._op_file)
             self._run_command(cmd)
-        return True
+        return not self.check()
