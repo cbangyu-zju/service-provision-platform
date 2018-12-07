@@ -28,9 +28,9 @@ class PasswordPeriod(base.Base):
     def _set(self):
         cmd = "service rsyslog start && chkconfig rsyslog on"
         self._run_command(cmd)
-        return True
+        return self.check()
 
     def _unset(self):
         cmd = "chkconfig rsyslog off && service rsyslog stop"
         self._run_command(cmd)
-        return True
+        return not self.check()
