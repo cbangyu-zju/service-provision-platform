@@ -29,7 +29,7 @@ class PasswordPeriod(base.Base):
         if status:
             return self._set()
         else:
-            return not self._unset()
+            return self._unset()
 
     def _prepare(self):
         prepare_cmd = "cp '{origin}' '{end}'".format(origin=self._op_file, end=self._op_file+"_tmp")
@@ -47,4 +47,4 @@ class PasswordPeriod(base.Base):
     def _unset(self):
         prepare_cmd = "cp '{origin}' '{end}'".format(origin=self._op_file+"_tmp", end=self._op_file)
         self._run_command(prepare_cmd)
-        return self.check()
+        return not self.check()

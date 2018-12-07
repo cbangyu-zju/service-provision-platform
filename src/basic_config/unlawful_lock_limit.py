@@ -24,7 +24,10 @@ class UnlawfulLockLimit(base.Base):
     def set(self, status):
         if status == self._status:
             return
-        return self._set()
+        if status:
+            return self._set()
+        else:
+            return self._unset()
 
     def _set(self):
         if not self.check():
@@ -32,7 +35,7 @@ class UnlawfulLockLimit(base.Base):
              dcredit=-4 ocredit=-1 dictpath=/usr/share/cracklib/pw_dict' >> '{op_file}'"
             cmd = cmd.format(op_file=self._op_file)
             self._run_command(cmd)
-        return True
+        return self.check()
 
     def _unset(self):
         if self.check():
@@ -40,4 +43,4 @@ class UnlawfulLockLimit(base.Base):
                   "lcredit=-1.*dcredit=-4.*ocredit=-1.*dictpath=/usr/share/cracklib/pw_dict'/d' '{op_file}'"\
                 .format(op_file=self._op_file)
             self._run_command(cmd)
-        return True
+        return not self.check()
