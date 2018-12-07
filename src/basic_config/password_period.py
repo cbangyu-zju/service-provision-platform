@@ -14,6 +14,7 @@ class PasswordPeriod(base.Base):
               "&& grep '^PASS_MIN_DAYS[[:space:]]0' '{op_file}' " \
               "&& grep '^PASS_MIN_LEN[[:space:]]5' '{op_file}' " \
               "&& grep '^PASS_WARN_AGE[[:space:]]7' '{op_file}' "
+        cmd = cmd.format(op_file=self._op_file)
         stdout, err = self._run_command(cmd)
         if stdout.find(b"PASS_MAX_DAYS") >= 0 and stdout.find(b"PASS_MIN_DAYS") >= 0 and \
                 stdout.find(b"PASS_MIN_LEN") >= 0  and stdout.find(b"PASS_WARN_AGE") >= 0:
@@ -28,7 +29,7 @@ class PasswordPeriod(base.Base):
         if status:
             return self._set()
         else:
-            return not self._set()
+            return not self._unset()
 
     def _prepare(self):
         prepare_cmd = "cp '{origin}' '{end}'".format(origin=self._op_file, end=self._op_file+"_tmp")
