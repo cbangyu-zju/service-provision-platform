@@ -1,10 +1,10 @@
 from . import base
 
 
-class PasswordComplexity(base.Base):
+class UnlawfulLockLimit(base.Base):
 
     def __init__(self, system, version):
-        super(PasswordComplexity, self).__init__(system, version)
+        super(UnlawfulLockLimit, self).__init__(system, version)
         self._op_file = "/etc/pam.d/system-auth"
         self._status = self.check()
 
