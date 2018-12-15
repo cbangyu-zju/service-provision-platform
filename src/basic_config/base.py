@@ -3,11 +3,13 @@ import subprocess
 
 
 class Base(object):
+    _op_file = ""
 
     def __init__(self, system, version):
         self._logger= logging.getLogger(__name__)
         self._system = system
         self._version = version
+        self._status = self.check()
 
     def check(self):
         pass

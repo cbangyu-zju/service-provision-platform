@@ -5,7 +5,6 @@ class AuditFileAuthority(base.Base):
 
     def __init__(self, system, version):
         super(AuditFileAuthority, self).__init__(system, version)
-        self._status = self.check()
 
     def check(self):
         file_auth_map = {
@@ -17,7 +16,7 @@ class AuditFileAuthority(base.Base):
             "/etc/group": b"-rw-r--r--"
         }
         ready_count = 0
-        for key, value in file_auth_map:
+        for key, value in file_auth_map.items():
             cmd = "ls -la {op_file}".format(op_file=key)
             stdout, err = self._run_command(cmd)
             if stdout.find(value) >= 0:

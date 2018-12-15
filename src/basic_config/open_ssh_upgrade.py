@@ -1,13 +1,11 @@
 from . import base
 
 
-class PasswordPeriod(base.Base):
+class OpenSSHUpgrade(base.Base):
+    _op_file = "openssh-7.5p1"
 
     def __init__(self, system, version):
-        super(PasswordPeriod, self).__init__(system, version)
-        self._op_file = "openssh-7.5p1"
-        self._first_status = self.check()
-        self._status = self._first_status
+        super(OpenSSHUpgrade, self).__init__(system, version)
 
     def check(self):
         cmd = "ssh -V"

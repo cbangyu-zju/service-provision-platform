@@ -2,11 +2,10 @@ from . import base
 
 
 class PasswordPeriod(base.Base):
+    _op_file = "/etc/login.defs"
 
     def __init__(self, system, version):
         super(PasswordPeriod, self).__init__(system, version)
-        self._op_file = "/etc/login.defs"
-        self._status = self.check()
         self._prepare()
 
     def check(self):

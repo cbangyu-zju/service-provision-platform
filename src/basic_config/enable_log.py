@@ -1,12 +1,10 @@
 from . import base
 
 
-class PasswordPeriod(base.Base):
+class EnableLog(base.Base):
 
     def __init__(self, system, version):
-        super(PasswordPeriod, self).__init__(system, version)
-        self._first_status = self.check()
-        self._status = self._first_status
+        super(EnableLog, self).__init__(system, version)
 
     def check(self):
         cmd = "ps -ef|grep syslogd"

@@ -2,6 +2,7 @@ from . import base
 
 
 class DesignAuditRegulation(base.Base):
+    _op_file = "/etc/rsyslog.conf"
     _regulation = [
         "*.info;mail.none;authpriv.none;cron.none /var/log/messages",
         "authpriv.* /var/log/secure",
@@ -12,10 +13,7 @@ class DesignAuditRegulation(base.Base):
     ]
 
     def __init__(self, system, version):
-
         super(DesignAuditRegulation, self).__init__(system, version)
-        self._op_file = "/etc/rsyslog.conf"
-        self._status = self.check()
 
     def check(self):
         ready_count = 0

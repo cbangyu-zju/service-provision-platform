@@ -2,11 +2,10 @@ from . import base
 
 
 class LoginFaidedTimeLimit(base.Base):
+    _op_file = "/etc/pam.d/system-auth"
 
     def __init__(self, system, version):
         super(LoginFaidedTimeLimit, self).__init__(system, version)
-        self._op_file = "/etc/pam.d/system-auth"
-        self._status = self.check()
 
     def check(self):
         cmd = "grep '^account[[:space:]]required[[:space:]]pam_tally2.so[[:space:]]deny=5[[:space:]]reset' " \

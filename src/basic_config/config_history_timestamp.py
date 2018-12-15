@@ -2,14 +2,13 @@ from . import base
 
 
 class ConfigHistoryTimestamp(base.Base):
+    _op_file = "/etc/bashrc"
     _regulation = [
         "export HISTTIMEFORMAT=\"%F %T\"",
     ]
 
     def __init__(self, system, version):
         super(ConfigHistoryTimestamp, self).__init__(system, version)
-        self._op_file = "/etc/bashrc"
-        self._status = self.check()
 
     def check(self):
         ready_count = 0

@@ -2,12 +2,10 @@ from . import base
 
 
 class ProtectionAuditLog(base.Base):
+    _op_file = "/etc/rsyslog.conf"
 
     def __init__(self, system, version):
         super(ProtectionAuditLog, self).__init__(system, version)
-        self._op_file = "/etc/rsyslog.conf"
-        self._first_status = self.check()
-        self._status = self._first_status
 
     def check(self):
         cmd = "ls -la {op_file}".format(op_file=self._op_file)

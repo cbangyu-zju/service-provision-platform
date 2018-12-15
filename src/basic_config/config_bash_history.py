@@ -2,6 +2,7 @@ from . import base
 
 
 class ConfigBashHistory(base.Base):
+    _op_file = "/etc/profile"
     _regulation = [
         "HISTSIZE=5",
         "HISTFILESIZE=5"
@@ -9,8 +10,6 @@ class ConfigBashHistory(base.Base):
 
     def __init__(self, system, version):
         super(ConfigBashHistory, self).__init__(system, version)
-        self._op_file = "/etc/profile"
-        self._status = self.check()
 
     def check(self):
         ready_count = 0

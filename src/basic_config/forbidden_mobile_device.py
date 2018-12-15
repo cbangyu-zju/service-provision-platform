@@ -2,12 +2,10 @@ from . import base
 
 
 class ForbiddenMobileDevice(base.Base):
+    _op_file = "/etc/security/console.perms"
 
     def __init__(self, system, version):
         super(ForbiddenMobileDevice, self).__init__(system, version)
-        self._op_file = "/etc/security/console.perms"
-        self._first_status = self.check()
-        self._status = self._first_status
 
     def check(self):
         cmd = "grep '^#<console' '{op_file}'".format(op_file=self._op_file)

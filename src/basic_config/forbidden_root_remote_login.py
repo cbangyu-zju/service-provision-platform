@@ -2,17 +2,16 @@ from . import base
 
 
 class ForbiddenRootRemoteLogin(base.Base):
+    _op_file = "/etc/ssh/sshd_config"
 
     def __init__(self, system, version):
         super(ForbiddenRootRemoteLogin, self).__init__(system, version)
-        self._op_file = "/etc/ssh/sshd_config"
-        self._status = self.check()
         self._prepare()
 
     def check(self):
         cmd = "grep '^PermitRootLogin no' '{origin}'".format(origin=self._op_file)
         stdout, err = self._run_command(cmd)
-        if stdout.find("PermitRootLogin no") >= 0:
+        if stdout.find(b"PermitRootLogin no") >= 0:
             self._status = True
         else:
             self._status = False

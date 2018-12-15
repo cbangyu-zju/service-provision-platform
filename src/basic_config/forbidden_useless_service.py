@@ -6,7 +6,6 @@ class ForbiddenUselessService(base.Base):
 
     def __init__(self, system, version):
         super(ForbiddenUselessService, self).__init__(system, version)
-        self._status = self.check()
 
     def check(self):
         ready_count = 0

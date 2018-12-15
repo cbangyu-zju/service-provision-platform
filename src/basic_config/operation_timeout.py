@@ -2,11 +2,10 @@ from . import base
 
 
 class OperationTimeout(base.Base):
+    _op_file = "/etc/pam.d/system-auth"
 
     def __init__(self, system, version):
         super(OperationTimeout, self).__init__(system, version)
-        self._op_file = "/etc/pam.d/system-auth"
-        self._status = self.check()
 
     def check(self):
         cmd = "grep '^auth[[:space:]]required[[:space:]]pam_tally2.so[[:space:]]deny=5[[:space:]]unlock_time=600' " \
