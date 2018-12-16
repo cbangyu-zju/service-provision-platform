@@ -35,14 +35,34 @@ class SystemConfigDlg(object):
         Form.setWindowTitle(_translate("Form", "Form"))
 
         self.tabWidget = QtWidgets.QTabWidget(Form)
-        self.tabWidget.setGeometry(QtCore.QRect(180, 80, 700, 500))
+        self.tabWidget.setGeometry(QtCore.QRect(170, 80, 700, 500))
         self.tabWidget.setObjectName("tabWidget")
+        self.tabWidget.setStyleSheet(
+        """
+            QTabBar::tab:selected {
+                background: gray;
+                color: white;
+            }
+            QTabBar::tab {
+                background: #404040;
+                color: white;
+                width: 200px;
+                height: 30px;
+                border-top-left-radius: 2px;
+                border-top-right-radius: 3px;
+                margin-right: 2px;
+            }
+            QTabWidget::pane {
+                background: gray;
+            }
+        """)
 
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("一键扫描")
         self.tabWidget.addTab(self.tab, "")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Form", "一键扫描"))
         self.tab.addAction(self._check_all())
+
 
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("一键配置")
@@ -258,11 +278,14 @@ class SystemConfigDlg(object):
     def _check_all(self):
         for button in self._button_list:
             button.refresh()
+            button.setEnabled(True)
 
     def _set_all(self):
         for button in self._button_list:
             button.set(True)
+            button.setEnabled(False)
 
     def _unset_all(self):
         for button in self._button_list:
             button.set(False)
+            button.setEnabled(False)

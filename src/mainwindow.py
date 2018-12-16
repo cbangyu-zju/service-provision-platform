@@ -22,7 +22,7 @@ class Ui_MainWindow(object):
     }
 
     def setupUi(self, MainWindow):
-        MainWindow.setPalette(QtGui.QPalette(QtGui.QColor(40, 40, 40)))
+        MainWindow.setPalette(QtGui.QPalette(QtGui.QColor(30, 30, 30)))
         MainWindow.setObjectName("")
         MainWindow.resize(900, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
