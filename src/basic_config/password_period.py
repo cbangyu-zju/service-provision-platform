@@ -6,7 +6,7 @@ class PasswordPeriod(base.Base):
 
     def __init__(self, system, version):
         super(PasswordPeriod, self).__init__(system, version)
-        self._prepare()
+        # self._prepare()
 
     def check(self):
         cmd = "grep '^PASS_MAX_DAYS[[:space:]]99999' '{op_file}' " \

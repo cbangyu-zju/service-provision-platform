@@ -35,7 +35,7 @@ class SystemConfigDlg(object):
         Form.setWindowTitle(_translate("Form", "Form"))
 
         self.tabWidget = QtWidgets.QTabWidget(Form)
-        self.tabWidget.setGeometry(QtCore.QRect(150, 80, 700, 500))
+        self.tabWidget.setGeometry(QtCore.QRect(180, 80, 700, 500))
         self.tabWidget.setObjectName("tabWidget")
 
         self.tab = QtWidgets.QWidget()
@@ -55,6 +55,8 @@ class SystemConfigDlg(object):
         self.tabWidget.addTab(self.tab_3, "")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Form", "一键还原"))
         self.tab_3.addAction(self._unset_all())
+
+        self.tabWidget.currentChanged.connect(self._on_tab_change)
 
         # l1
         self.button_11= config_button.ConfigButton(
@@ -102,7 +104,7 @@ class SystemConfigDlg(object):
             self.tabWidget, operation_timeout.OperationTimeout(self._system, self._version))
         self.button_31.setGeometry(QtCore.QRect(
             self._left_interval,
-            self._head_interval+self._button_hight+2*self._button_interval_h,
+            self._head_interval+2*(self._button_hight+self._button_interval_h),
             self._button_weight, self._button_hight))
         self.button_31.setObjectName("button_31")
         self.button_31.setText(_translate("Form", "操作超时锁定"))
@@ -112,7 +114,7 @@ class SystemConfigDlg(object):
             self.tabWidget, login_failed_time_limit.LoginFaidedTimeLimit(self._system, self._version))
         self.button_32.setGeometry(QtCore.QRect(
             self._left_interval+self._button_weight+self._button_interval_w,
-            self._head_interval+self._button_hight+2*self._button_interval_h,
+            self._head_interval+2*(self._button_hight+self._button_interval_h),
             self._button_weight, self._button_hight))
         self.button_32.setObjectName("button_32")
         self.button_32.setText(_translate("Form", "登陆失败次数"))
@@ -235,8 +237,23 @@ class SystemConfigDlg(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
         for button in self._button_list:
-            # button.refresh()
-            pass
+            button.refresh()
+            button.clicked.connect(button.on_click)
+
+    def hideUi(self):
+        self.tabWidget.setVisible(False)
+
+    def showUi(self):
+        self.tabWidget.setVisible(True)
+
+    def _on_tab_change(self, i):
+        if i == 0:
+            self._check_all()
+            print(i)
+        elif i == 1:
+            self._set_all()
+        elif i == 2:
+            self._unset_all()
 
     def _check_all(self):
         for button in self._button_list:

@@ -6,20 +6,20 @@ class ConfigButton(QtWidgets.QPushButton):
     def __init__(self, widget, config_model):
         super(ConfigButton, self).__init__(widget)
         self._model = config_model
-        self._set_palette = QtGui.QPalette(QtGui.QColor(112, 144, 79))
-        self._unset_palette = QtGui.QPalette(QtGui.QColor(202, 120, 49))
+        self._set_green = "QPushButton {background-color: green; color: white;}"
+        self._set_red = "QPushButton {background-color: #e5863b; color: white;}"
 
-    def action(self):
+    def on_click(self):
         status = self.check()
         self.set(not status)
-        self._refresh(status)
+        self.refresh()
 
     def check(self):
         return self._model.check()
 
     def set(self, status):
         self._model.set(status)
-        self._refresh(status)
+        self.refresh()
 
     def refresh(self):
         status = self.check()
@@ -35,8 +35,8 @@ class ConfigButton(QtWidgets.QPushButton):
             self._set_to_red()
 
     def _set_to_green(self):
-        self.setPalette(self._set_palette)
+        self.setStyleSheet(self._set_green)
 
     def _set_to_red(self):
-        self.setPalette(self._unset_palette)
+        self.setStyleSheet(self._set_red)
 

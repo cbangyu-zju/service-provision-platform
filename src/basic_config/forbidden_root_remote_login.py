@@ -6,7 +6,7 @@ class ForbiddenRootRemoteLogin(base.Base):
 
     def __init__(self, system, version):
         super(ForbiddenRootRemoteLogin, self).__init__(system, version)
-        self._prepare()
+        # self._prepare()
 
     def check(self):
         cmd = "grep '^PermitRootLogin no' '{origin}'".format(origin=self._op_file)

@@ -9,7 +9,7 @@ class Base(object):
         self._logger= logging.getLogger(__name__)
         self._system = system
         self._version = version
-        self._status = self.check()
+        self._status = True #self.check()
 
     def check(self):
         pass
