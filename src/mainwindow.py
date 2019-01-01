@@ -22,7 +22,7 @@ class Ui_MainWindow(object):
     }
 
     def setupUi(self, MainWindow):
-        MainWindow.setPalette(QtGui.QPalette(QtGui.QColor(30, 30, 30)))
+        MainWindow.setPalette(QtGui.QPalette(QtGui.QColor(122, 122, 122)))
         MainWindow.setObjectName("")
         MainWindow.resize(900, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -34,16 +34,14 @@ class Ui_MainWindow(object):
 
         self.treeView = function_treeview.FunctionnTreeView(self.centralwidget)
         self.treeView.setPalette(QtGui.QPalette(QtGui.QColor(40, 40, 40)))
-        self.treeView.setGeometry(QtCore.QRect(0, 80, 150, 550))
+        self.treeView.setGeometry(QtCore.QRect(0, 70, 150, 550))
         self.treeView.setObjectName("treeView")
         self.treeView.setHeaderLabel("")
         self.addItems()
 
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(0, 0, 50, 50))
-        qpic = QtGui.QPicture()
-        qpic.load("./res/images/Logo.jpeg")
-        self.label.setPicture(qpic)
+        self.label.setGeometry(QtCore.QRect(0, 0, 900, 86))
+        self.label.setPixmap(QtGui.QPixmap("./src/res/images/Logo.jpeg"))
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)

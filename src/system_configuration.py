@@ -35,7 +35,7 @@ class SystemConfigDlg(object):
         Form.setWindowTitle(_translate("Form", "Form"))
 
         self.tabWidget = QtWidgets.QTabWidget(Form)
-        self.tabWidget.setGeometry(QtCore.QRect(170, 80, 700, 500))
+        self.tabWidget.setGeometry(QtCore.QRect(170, 100, 700, 460))
         self.tabWidget.setObjectName("tabWidget")
         self.tabWidget.setStyleSheet(
         """
