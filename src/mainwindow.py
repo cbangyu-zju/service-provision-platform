@@ -30,7 +30,6 @@ class Ui_MainWindow(object):
 
         self.systemConfigDlg = system_configuration.SystemConfigDlg()
         self.systemConfigDlg.setupUi(self.centralwidget)
-        self.systemConfigDlg.hideUi()
 
         self.treeView = function_treeview.FunctionnTreeView(self.centralwidget)
         self.treeView.setPalette(QtGui.QPalette(QtGui.QColor(40, 40, 40)))
