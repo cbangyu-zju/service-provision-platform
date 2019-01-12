@@ -12,12 +12,12 @@ class AuditFileAuthority(base.Base):
             "/var/log/messages": b"-rw-------",
             "/var/log/wtmp": b"-rw-------",
             "/var/run/utmp": b"-rw-------",
-            "/etc/shadow": b"-rw-------",
+            "/etc/shadow": b"-r--------",
             "/etc/group": b"-rw-r--r--"
         }
         ready_count = 0
         for key, value in file_auth_map.items():
-            cmd = "ls -la {op_file}".format(op_file=key)
+            cmd = "ls -la '{op_file}'".format(op_file=key)
             stdout, err = self._run_command(cmd)
             if stdout.find(value) >= 0:
                 ready_count += 1
@@ -32,13 +32,11 @@ class AuditFileAuthority(base.Base):
             return self._unset()
 
     def _set(self):
-        cmd = "chmod 400 /etc/rsyslog.conf && chmod 600 /var/log/messages && chmod 600 /var/log/wtmp && " \
-              "chmod 600 /var/run/utmp && chmod 400 /etc/shadow && chmod 644 /etc/group && chkconfig rsyslog on"
+        cmd = "chmod 400 /etc/rsyslog.conf && chmod 600 /var/log/messages && chmod 600 /var/log/wtmp && chmod 600 /var/run/utmp && chmod 400 /etc/shadow && chmod 644 /etc/group && chkconfig rsyslog on"
         self._run_command(cmd)
         return self.check()
 
     def _unset(self):
-        cmd = "chmod 644 /etc/rsyslog.conf && chmod 600 /var/log/messages && chmod 664 /var/log/wtmp && " \
-              "chmod 664 /var/run/utmp && chmod 000 /etc/shadow && chmod 644 /etc/group"
+        cmd = "chmod 644 /etc/rsyslog.conf && chmod 600 /var/log/messages && chmod 664 /var/log/wtmp && chmod 664 /var/run/utmp && chmod 400 /etc/shadow && chmod 644 /etc/group"
         self._run_command(cmd)
         return not self.check()

@@ -9,9 +9,9 @@ class ForbiddenRootRemoteLogin(base.Base):
         # self._prepare()
 
     def check(self):
-        cmd = "grep '^PermitRootLogin no' '{origin}'".format(origin=self._op_file)
+        cmd = "grep '^PermitRootLogin yes' '{origin}'".format(origin=self._op_file)
         stdout, err = self._run_command(cmd)
-        if stdout.find(b"PermitRootLogin no") >= 0:
+        if stdout.find(b"PermitRootLogin yes") < 0:
             self._status = True
         else:
             self._status = False
@@ -30,8 +30,7 @@ class ForbiddenRootRemoteLogin(base.Base):
         self._run_command(prepare_cmd)
 
     def _set(self, status):
-        cmd = "sed -i 's/PermitRootLogin {origin}/PermitRootLogin {end}/g' '{op_file}' \
-            && sed -i 's/#PermitRootLogin {end}/PermitRootLogin {end}/' '{op_file}'"
+        cmd = "sed -i 's/PermitRootLogin {origin}/PermitRootLogin {end}/g' '{op_file}' && sed -i 's/#PermitRootLogin {end}/PermitRootLogin {end}/' '{op_file}'"
         origin = "yes"
         end = "no"
         if not status:

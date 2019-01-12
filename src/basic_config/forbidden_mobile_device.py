@@ -25,11 +25,11 @@ class ForbiddenMobileDevice(base.Base):
             self._unset()
 
     def _set(self):
-        cmd = "sed -i 's/^<console/^#<console/g' '{op_file}'".format(op_file=self._op_file)
+        cmd = "sed -i 's/^<console/#<console/g' '{op_file}'".format(op_file=self._op_file)
         self._run_command(cmd)
         return self.check()
 
     def _unset(self):
-        cmd = "sed -i 's/^#<console/^<console/g' '{op_file}'".format(op_file=self._op_file)
+        cmd = "sed -i 's/^#<console/<console/g' '{op_file}'".format(op_file=self._op_file)
         self._run_command(cmd)
         return not self.check()

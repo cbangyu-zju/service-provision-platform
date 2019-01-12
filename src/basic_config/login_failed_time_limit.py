@@ -12,7 +12,7 @@ class LoginFaidedTimeLimit(base.Base):
               " '{op_file}' "
         cmd = cmd.format(op_file=self._op_file)
         stdout, err = self._run_command(cmd)
-        if stdout.find(b"auth") >= 0:
+        if stdout.find(b"account") >= 0:
             self._status = True
         else:
             self._status = False

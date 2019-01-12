@@ -31,7 +31,7 @@ class ForbiddenUselessService(base.Base):
     def _check(self, device):
         cmd = "chkconfig --list {device}".format(device=device)
         stdout, err = self._run_command(cmd.split())
-        if stdout.find(b"3:off") > 0 and stdout.find(b"5:off") > 0:
+        if (stdout.find(b"3:off") > 0 and stdout.find(b"5:off") > 0) or stdout.find(b"SysV"):
             return 1
         else:
             return 0

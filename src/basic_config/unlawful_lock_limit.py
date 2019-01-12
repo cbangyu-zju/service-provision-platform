@@ -8,13 +8,10 @@ class UnlawfulLockLimit(base.Base):
         super(UnlawfulLockLimit, self).__init__(system, version)
 
     def check(self):
-        cmd = "grep '^password[[:space:]]requisite[[:space:]]pam[[:space:]]cracklib.so[[:space:]]retry=5[[:space:]]" \
-              "difok=3[[:space:]]minlen=8[[:space:]]ucredit=-2[[:space:]]lcredit=-1[[:space:]]dcredit=-4[[:space:]]" \
-              "ocredit=-1[[:space:]]dictpath=/usr/share/cracklib/pw_dict' " \
-              " '{op_file}' "
+        cmd = "grep '^password[[:space:]]requisite[[:space:]]pam_cracklib.so[[:space:]]retry=5[[:space:]]difok=3[[:space:]]minlen=8[[:space:]]ucredit=-2[[:space:]]lcredit=-1[[:space:]]dcredit=-4[[:space:]]ocredit=-1[[:space:]]dictpath=/usr/share/cracklib/pw_dict' '{op_file}' "
         cmd = cmd.format(op_file=self._op_file)
         stdout, err = self._run_command(cmd)
-        if stdout.find(b"auth") >= 0:
+        if stdout.find(b"password") >= 0:
             self._status = True
         else:
             self._status = False
@@ -30,16 +27,13 @@ class UnlawfulLockLimit(base.Base):
 
     def _set(self):
         if not self.check():
-            cmd = "echo 'password requisite pam_cracklib.so retry=5  difok=3 minlen=8 ucredit=-2 lcredit=-1 \
-             dcredit=-4 ocredit=-1 dictpath=/usr/share/cracklib/pw_dict' >> '{op_file}'"
+            cmd = "echo 'password requisite pam_cracklib.so retry=5 difok=3 minlen=8 ucredit=-2 lcredit=-1 dcredit=-4 ocredit=-1 dictpath=/usr/share/cracklib/pw_dict' >> '{op_file}'"
             cmd = cmd.format(op_file=self._op_file)
             self._run_command(cmd)
         return self.check()
 
     def _unset(self):
         if self.check():
-            cmd = "sed -i '/^password.*requisite.*pam_cracklib.so.*retry=5.*difok=3.*minlen=8.*ucredit=-2.*" \
-                  "lcredit=-1.*dcredit=-4.*ocredit=-1.*dictpath=/usr/share/cracklib/pw_dict'/d' '{op_file}'"\
-                .format(op_file=self._op_file)
+            cmd = "sed -i '/^password.*requisite.*pam_cracklib.so.*retry=5.*difok=3.*minlen=8.*ucredit=-2.*lcredit=-1.*dcredit=-4.*ocredit=-1.*dictpath=\/usr\/share\/cracklib\/pw_dict/d' '{op_file}'".format(op_file=self._op_file)
             self._run_command(cmd)
         return not self.check()
