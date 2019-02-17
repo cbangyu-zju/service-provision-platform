@@ -15,6 +15,7 @@ from basic_config import enable_log, design_audit_regulation, audit_file_authori
 from basic_config import config_umask, config_bash_history, config_history_timestamp
 from basic_config import forbidden_keyboard_close_command, forbidden_mobile_device
 from basic_config import open_ssh_upgrade
+import time
 
 
 class SystemConfigDlg(object):
@@ -282,10 +283,12 @@ class SystemConfigDlg(object):
 
     def _set_all(self):
         for button in self._button_list:
-            button.set(True)
             button.setEnabled(False)
+            button.set(True)
+            time.sleep(1)
 
     def _unset_all(self):
         for button in self._button_list:
-            button.set(False)
             button.setEnabled(False)
+            button.set(False)
+            time.sleep(1)
