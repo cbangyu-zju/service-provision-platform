@@ -47,6 +47,8 @@ tar -xzf openssh-7.5p1.tar.gz
 ```bash
 git clone  https://github.com/cbangyu-zju/sevice-provision-platform.git
 cd sevice-provision-platform
+/usr/local/python/bin/pyvenv venv
+source venv/bin/activate
 cp -r <openssh7.5> ./openssh7.5p1
 pip install -r requirements.txt
 python src/main.py
