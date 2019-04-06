@@ -53,3 +53,10 @@ cp -r <openssh7.5> ./openssh7.5p1
 pip install -r requirements.txt
 python src/main.py
 ```
+
+## build
+```
+pip install pyinstaller -i https://pypi.douban.com/simple   // install pyinstaller
+cd src
+pyinstaller -F main.py    // build
+```
