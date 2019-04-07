@@ -23,7 +23,7 @@ _ssl _ssl.c \
 EOF
 
 echo "正在编译安装Python"
-./configure --prefix=/usr/local/python && make && make install
+./configure --prefix=/usr/local/python --enable-shared && make && make install
 cd /root
 
 echo "删除安装包"

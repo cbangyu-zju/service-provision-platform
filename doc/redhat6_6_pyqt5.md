@@ -26,7 +26,7 @@ wget https://jaist.dl.sourceforge.net/project/pyqt/PyQt5/PyQt-5.7/PyQt5_gpl-5.7.
 # 7. 安装pyqt5.7
 tar xzvf PyQt5_gpl-5.7.tar.gz
 cd PyQt5_gpl-5.7
-python configure --qmake=/usr/bin/qmake-qt5
+python configure.py --qmake=/usr/bin/qmake-qt5
 make all && make install
 
 ```
