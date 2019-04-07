@@ -14,7 +14,7 @@ from elements import function_treeview
 class Ui_MainWindow(object):
 
     _tree_map = {
-        '操作系统': ['Redhat', 'Centos', 'Ubuntu', '凝思磐石', '中标麒麟'],
+        '操作系统': [],
         '应用服务': [],
         '中间件': [],
         '数据库': [],
@@ -31,9 +31,9 @@ class Ui_MainWindow(object):
         self.systemConfigDlg = system_configuration.SystemConfigDlg()
         self.systemConfigDlg.setupUi(self.centralwidget)
 
-        self.treeView = function_treeview.FunctionnTreeView(self.centralwidget)
+        self.treeView = function_treeview.FunctionTreeWidget(self.centralwidget)
         self.treeView.setPalette(QtGui.QPalette(QtGui.QColor(40, 40, 40)))
-        self.treeView.setGeometry(QtCore.QRect(0, 70, 150, 550))
+        self.treeView.setGeometry(QtCore.QRect(0, 80, 150, 550))
         self.treeView.setObjectName("treeView")
         self.treeView.setHeaderLabel("")
         self.addItems()
