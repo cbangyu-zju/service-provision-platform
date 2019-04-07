@@ -14,7 +14,6 @@ class OpenSSHUpgrade(base.Base):
             self._status = True
         else:
             self._status = False
-        self._logger.warning("stdout: %s, err: %s, self._status: %s", stdout, err, self._status)
         return self._status
 
     def set(self, status):
