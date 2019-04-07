@@ -6,7 +6,7 @@ class PasswordPeriod(base.Base):
 
     def __init__(self, system, version):
         super(PasswordPeriod, self).__init__(system, version)
-        # self._prepare()
+        self._prepare()
 
     def check(self):
         cmd = "grep '^PASS_MAX_DAYS[[:space:]]99999' '{op_file}' " \
@@ -31,7 +31,7 @@ class PasswordPeriod(base.Base):
             return self._unset()
 
     def _prepare(self):
-        prepare_cmd = "cp '{origin}' '{end}'".format(origin=self._op_file, end=self._op_file+"_tmp")
+        prepare_cmd = "cp '{origin}' '{end}'".format(origin=self._op_file, end=self._op_file+"_password_tmp")
         self._run_command(prepare_cmd)
 
     def _set(self):
@@ -44,6 +44,6 @@ class PasswordPeriod(base.Base):
         return self.check()
 
     def _unset(self):
-        prepare_cmd = "cp '{origin}' '{end}'".format(origin=self._op_file+"_tmp", end=self._op_file)
+        prepare_cmd = "cp '{origin}' '{end}'".format(origin=self._op_file+"_password_tmp", end=self._op_file)
         self._run_command(prepare_cmd)
         return not self.check()
