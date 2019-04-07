@@ -18,5 +18,6 @@ class Base(object):
         pass
 
     def _run_command(self, command):
+        self._logger.info("command: %s", command)
         process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
         return process.communicate()

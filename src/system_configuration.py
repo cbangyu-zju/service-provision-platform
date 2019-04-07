@@ -270,7 +270,6 @@ class SystemConfigDlg(object):
     def _on_tab_change(self, i):
         if i == 0:
             self._check_all()
-            print(i)
         elif i == 1:
             self._set_all()
         elif i == 2:
