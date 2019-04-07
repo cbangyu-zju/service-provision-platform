@@ -18,6 +18,6 @@ class Base(object):
         pass
 
     def _run_command(self, command):
-        self._logger.warning("command: %s", " && ".join(command))
+        self._logger.warning("command: %s", command)
         process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
         return process.communicate()
