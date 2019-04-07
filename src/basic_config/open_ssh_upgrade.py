@@ -8,7 +8,7 @@ class OpenSSHUpgrade(base.Base):
         super(OpenSSHUpgrade, self).__init__(system, version)
 
     def check(self):
-        cmd = "ssh_version=$(ssh -V) && echo 'SSH Version: $ssh_version'"
+        cmd = "ssh_version=$(ssh -V 2>&1) && echo $ssh_version"
         stdout, err = self._run_command(cmd)
         if stdout.find(b"OpenSSH_7.5") >= 0:
             self._status = True
