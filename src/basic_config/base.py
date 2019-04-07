@@ -23,3 +23,6 @@ class Base(object):
         stdout, err = process.communicate()
         self._logger.warning("stdout: %s, err: %s", stdout, err)
         return stdout, err
+
+    def clear(self):
+        pass

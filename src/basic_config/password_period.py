@@ -47,3 +47,7 @@ class PasswordPeriod(base.Base):
         prepare_cmd = "cp '{origin}' '{end}'".format(origin=self._op_file+"_password_tmp", end=self._op_file)
         self._run_command(prepare_cmd)
         return not self.check()
+
+    def clear(self):
+        cmd = "rm 'backup'".format(backup=self._op_file+"_password_tmp")
+        self._run_command(cmd)
