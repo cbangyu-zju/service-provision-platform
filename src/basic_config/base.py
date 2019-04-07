@@ -21,4 +21,5 @@ class Base(object):
         self._logger.warning("command: %s", command)
         process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
         stdout, err = process.communicate()
+        self._logger.warning("stdout: %s, err: %s", stdout, err)
         return stdout, err
