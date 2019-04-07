@@ -1,5 +1,5 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QTreeWidget, QTreeWidgetItem, QWidget,\
+from PyQt5.QtWidgets import QTreeWidget, QWidget,\
     QLabel, QSpacerItem, QSizePolicy, QHBoxLayout
 
 
