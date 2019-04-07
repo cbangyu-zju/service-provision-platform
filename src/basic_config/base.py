@@ -20,4 +20,5 @@ class Base(object):
     def _run_command(self, command):
         self._logger.warning("command: %s", command)
         process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
-        return process.communicate()
+        stdout, err = process.communicate()
+        return stdout, err
