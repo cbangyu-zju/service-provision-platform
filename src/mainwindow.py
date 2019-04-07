@@ -14,7 +14,7 @@ from elements import function_treeview
 class Ui_MainWindow(object):
 
     _tree_map = {
-        '操作系统': [],
+        '基础配置': [],
         '应用服务': [],
         '中间件': [],
         '数据库': [],
@@ -72,7 +72,7 @@ class Ui_MainWindow(object):
     def _on_click_tree(self, item, column):
         selectd_item = self.treeView.selectedItems()[0]
         item_text = selectd_item.text(0)
-        if item_text == '操作系统' or item_text in self._tree_map['操作系统']:
+        if item_text == '基础配置':
             self.systemConfigDlg.showUi()
         else:
             self.systemConfigDlg.hideUi()
