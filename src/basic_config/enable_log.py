@@ -9,7 +9,7 @@ class EnableLog(base.Base):
     def check(self):
         cmd = "ps -ef|grep syslogd"
         stdout, err = self._run_command(cmd)
-        if stdout.find(b"/usr/sbin/rsyslogd") >= 0:
+        if stdout.find(b"rsyslogd") >= 0:
             self._status = True
         else:
             self._status = False
